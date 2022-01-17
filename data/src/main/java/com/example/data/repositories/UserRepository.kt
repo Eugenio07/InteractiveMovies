@@ -24,7 +24,7 @@ class UserRepository(
         val user = localDataSource.getUser()
 
         return if (user.firstName.isNotEmpty()) {
-            Either.Right(User())
+            Either.Right(user)
         } else {
             when (val response = remoteDataSource.userProfile(user.tokenType, user.token)) {
                 is Either.Left -> response
