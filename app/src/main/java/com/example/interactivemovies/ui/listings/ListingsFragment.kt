@@ -15,7 +15,9 @@ import com.example.interactivemovies.databinding.ListingsFragmentBinding
 import com.example.interactivemovies.ui.listings.ListingsViewModel.ListingsModel
 import com.example.interactivemovies.ui.listings.ListingsViewModel.ListingsModel.GoToDetail
 import com.orhanobut.logger.Logger
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ListingsFragment : Fragment() {
     private val viewModel: ListingsViewModel by viewModels()
     private lateinit var binding: ListingsFragmentBinding

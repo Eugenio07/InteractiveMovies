@@ -9,10 +9,37 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.profile.ProfileFragment">
+        tools:context=".ui.profile.ProfileFragment"
+        android:layout_marginHorizontal="16dp"
+        android:orientation="vertical">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome"
+            android:textSize="24sp"
+            android:layout_marginBottom="20dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/tv_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/email"
+            android:textSize="24sp"
+            android:layout_marginBottom="20dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/tv_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/card_no"
+            android:textSize="24sp"
+            android:layout_marginBottom="20dp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
 </layout>

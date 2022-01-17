@@ -16,7 +16,9 @@ import com.example.interactivemovies.ui.login.LoginViewModel.LoginModel
 import com.example.interactivemovies.ui.login.LoginViewModel.LoginModel.GoToProfile
 import com.example.interactivemovies.ui.login.LoginViewModel.LoginModel.ShowError
 import com.orhanobut.logger.Logger
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
     private val viewModel: LoginViewModel by viewModels()
     private lateinit var binding: LoginFragmentBinding
