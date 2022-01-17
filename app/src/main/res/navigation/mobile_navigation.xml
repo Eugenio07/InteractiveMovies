@@ -3,23 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@id/loginFragment">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.example.interactivemovies.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
-
+        android:id="@+id/detailFragment"
+        android:name="com.example.interactivemovies.ui.detail.DetailFragment"
+        android:label="detail_fragment"
+        tools:layout="@layout/detail_fragment" />
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.interactivemovies.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
-
+        android:id="@+id/loginFragment"
+        android:name="com.example.interactivemovies.ui.login.LoginFragment"
+        android:label="login_fragment"
+        tools:layout="@layout/login_fragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.interactivemovies.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/profileFragment"
+        android:name="com.example.interactivemovies.ui.profile.ProfileFragment"
+        android:label="profile_fragment"
+        tools:layout="@layout/profile_fragment" />
+    <fragment
+        android:id="@+id/listingsFragment"
+        android:name="com.example.interactivemovies.ui.listings.ListingsFragment"
+        android:label="listings_fragment"
+        tools:layout="@layout/listings_fragment" >
+        <action
+            android:id="@+id/action_listingsFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
 </navigation>
