@@ -5,8 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.domain.Event
 import com.example.interactivemovies.ui.login.LoginViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class ListingsViewModel @Inject constructor(
     //private val userUseCases: UserUseCases,
 ) : ViewModel() {

@@ -12,7 +12,9 @@ import com.example.interactivemovies.R
 import com.example.interactivemovies.databinding.DetailFragmentBinding
 import com.example.interactivemovies.databinding.ProfileFragmentBinding
 import com.example.interactivemovies.ui.detail.DetailViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProfileFragment : Fragment() {
     private val viewModel: ProfileViewModel by viewModels()
     private lateinit var binding: ProfileFragmentBinding
