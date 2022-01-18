@@ -19,6 +19,7 @@ import com.example.interactivemovies.ui.listings.ListingsAdapter
 import com.example.interactivemovies.ui.listings.ListingsFragmentDirections
 import com.example.interactivemovies.ui.listings.ListingsListener
 import com.example.interactivemovies.ui.listings.ListingsViewModel
+import com.orhanobut.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -51,7 +52,7 @@ class DetailFragment : Fragment() {
                         fieldDuration.text = model.movie.length
                         fieldGenre.text = model.movie.genre
                         fieldSynopsis.text = model.movie.synopsis
-                        vvTrailer.setVideoPath(model.movie.video)
+                        vvTrailer.setVideoPath(model.movie.video.replace("http:", "https:"))
                         vvTrailer.start()
                     }
 

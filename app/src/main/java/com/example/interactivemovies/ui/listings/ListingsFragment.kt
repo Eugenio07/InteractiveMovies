@@ -29,7 +29,7 @@ class ListingsFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.listings_fragment, container, false)
         binding.viewModel = viewModel
 
-        binding.rvMovies.layoutManager = GridLayoutManager(requireContext(), 3)
+        binding.rvMovies.layoutManager = GridLayoutManager(requireContext(), 2)
 
         viewModel.findMovies()
 
