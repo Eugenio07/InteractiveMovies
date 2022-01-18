@@ -22,6 +22,10 @@ class DetailViewModel @Inject constructor(
     val model: LiveData<Event<DetailModel>>
         get() = _model
 
+    private val _showProgress = MutableLiveData<Boolean>()
+    val showProgress: LiveData<Boolean>
+        get() = _showProgress
+
     var movieName= ""
 
     sealed class DetailModel {
@@ -30,11 +34,15 @@ class DetailViewModel @Inject constructor(
     }
 
     init {
+        showProgress(true)
         viewModelScope.launch {
             val movie = moviesUseCases.getMovieByID(movieID)
             movieName = movie.name
             _model.value = Event(DetailModel.ShowMovieDetail(movie))
-
         }
+    }
+
+    fun showProgress(show: Boolean) {
+        _showProgress.value = show
     }
 }

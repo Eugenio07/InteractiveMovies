@@ -4,6 +4,9 @@ import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
+import android.view.View.GONE
+import android.view.View.VISIBLE
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
@@ -37,14 +40,21 @@ class DetailFragment : Fragment() {
         binding.lifecycleOwner = this
 
         viewModel.model.observe(viewLifecycleOwner, Observer(::changedUI))
+        viewModel.showProgress.observe(viewLifecycleOwner, Observer(::showProgress))
+
         setHasOptionsMenu(true)
         return binding.root
     }
 
+    private fun showProgress(show: Boolean) {
+        binding.progressCircular.visibility = if(show)  VISIBLE else GONE
+    }
+
     private fun changedUI(event: Event<DetailModel>) {
+        showProgress(false)
         event.getContentIfNotHandled()?.let { model ->
             when (model) {
-                is ShowError -> TODO()
+                is ShowError -> Toast.makeText(requireContext(), model.error, Toast.LENGTH_LONG).show()
                 is ShowMovieDetail -> {
                     with(binding) {
                         fieldTitle.text = model.movie.name

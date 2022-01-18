@@ -20,6 +20,11 @@ class UserRepository(
             }
         }
 
+    suspend fun getUserTransactions(cardNo: String){
+        val user = localDataSource.getUser()
+        remoteDataSource.userTransactions(user.tokenType, user.token, cardNo)
+    }
+
     suspend fun getUserProfile(): Either<String, User> {
         val user = localDataSource.getUser()
 

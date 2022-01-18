@@ -7,7 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
@@ -22,6 +25,8 @@ import com.example.interactivemovies.ui.detail.DetailViewModel
 import com.example.interactivemovies.ui.login.LoginFragmentDirections
 import com.example.interactivemovies.ui.login.LoginViewModel
 import com.example.interactivemovies.ui.profile.ProfileViewModel.ProfileModel
+import com.example.interactivemovies.ui.profile.ProfileViewModel.ProfileModel.ShowError
+import com.example.interactivemovies.ui.profile.ProfileViewModel.ProfileModel.ShowUserProfile
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -43,14 +48,26 @@ class ProfileFragment : Fragment() {
 
         viewModel.model.observe(viewLifecycleOwner, Observer(::changedUI))
 
+        viewModel.showProgress.observe(viewLifecycleOwner, Observer(::showProgress))
+
         return binding.root
     }
 
+    private fun showProgress(show: Boolean) {
+        binding.progressCircular.visibility = if(show) {
+            VISIBLE
+        } else {
+            binding.profileLayout.visibility = VISIBLE
+            GONE
+        }
+    }
+
     private fun changedUI(event: Event<ProfileModel>) {
+        viewModel.showProgress(false)
         event.getContentIfNotHandled()?.let { model ->
             when (model) {
-                is ProfileModel.ShowError -> TODO()
-                is ProfileModel.ShowUserProfile -> {
+                is ShowError -> Toast.makeText(requireContext(), model.error, Toast.LENGTH_LONG).show()
+                is ShowUserProfile -> {
                     binding.tvName.text = getString(R.string.welcome, "${model.user.firstName} ${model.user.lastName}")
                     binding.tvEmail.text = getString(R.string.email, model.user.email)
                     binding.tvCard.text = getString(R.string.card_no, model.user.cardNumber)

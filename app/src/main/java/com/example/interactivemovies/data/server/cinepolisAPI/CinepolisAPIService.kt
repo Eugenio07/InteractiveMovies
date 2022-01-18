@@ -3,12 +3,13 @@ package com.example.interactivemovies.data.server.cinepolisAPI
 import com.example.interactivemovies.data.server.getRetrofit
 import retrofit2.http.*
 
-const val ROOT_URL = "https://stage-api.cinepolis.com/"
+const val ROOT_URL = "https://stage-api.cinepolis.com"
 const val API_KEY = "stage_HNYh3RaK_Test"
 
-const val LOGIN_USER = "v2/oauth/token"
-const val USER_PROFILE = "v1/members/profile?country_code=MX"
-const val GET_LISTINGS = "v2/movies?country_code=MX&cinemas=61"
+const val LOGIN_USER = "/v2/oauth/token"
+const val USER_PROFILE = "/v1/members/profile?country_code=MX"
+const val GET_LISTINGS = "/v2/movies?country_code=MX&cinemas=61"
+const val USER_TRANSACTIONS = "/v1/members/loyalty/"
 
 interface CinepolisAPIService {
     @FormUrlEncoded
@@ -29,8 +30,16 @@ interface CinepolisAPIService {
         @Header("Authorization") auth: String
     ): UserProfileResponse
 
+    @POST(USER_TRANSACTIONS)
+    suspend fun getUserTransactions(
+        @Header("api_key") apiKey: String = API_KEY,
+        @Header("Authorization") auth: String, @Body transactionRequest: TransactionRequest
+    )
+
     @GET(GET_LISTINGS)
     suspend fun getListings(@Header("api_key") apiKey: String = API_KEY): ListingsResponse
+
+
 
 
 }

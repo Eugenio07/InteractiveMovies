@@ -5,7 +5,7 @@ import com.example.interactivemovies.data.database.entity.UserDB
 
 @Dao
 interface UserDao {
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertUser(userDB: UserDB)
 
     @Update

@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.domain.Either
 import com.example.domain.Event
 import com.example.domain.User
-import com.example.interactivemovies.ui.login.LoginViewModel
 import com.example.interactivemovies.ui.profile.ProfileViewModel.ProfileModel.ShowError
 import com.example.interactivemovies.ui.profile.ProfileViewModel.ProfileModel.ShowUserProfile
 import com.example.usecases.UserUseCases
@@ -24,18 +23,33 @@ class ProfileViewModel @Inject constructor(
     val model: LiveData<Event<ProfileModel>>
         get() = _model
 
+    private val _showProgress = MutableLiveData<Boolean>()
+    val showProgress: LiveData<Boolean>
+        get() = _showProgress
 
-    sealed class ProfileModel{
-        data class ShowUserProfile(val user: User): ProfileModel()
-        data class ShowError(val error: String): ProfileModel()
+    sealed class ProfileModel {
+        data class ShowUserProfile(val user: User) : ProfileModel()
+        data class ShowError(val error: String) : ProfileModel()
     }
 
     init {
+        showProgress(true)
         viewModelScope.launch {
-            _model.value = when(val response = userUseCases.getUserProfile()){
+            _model.value = when (val response = userUseCases.getUserProfile()) {
                 is Either.Left -> Event(ShowError(response.l))
                 is Either.Right -> Event(ShowUserProfile(response.r))
             }
+        }
+    }
+
+    fun showProgress(show: Boolean) {
+        _showProgress.value = show
+    }
+
+    fun getUserTransactions() {
+        showProgress(true)
+        viewModelScope.launch {
+            userUseCases.getUserTransactions("1303030981578736")
         }
     }
 }

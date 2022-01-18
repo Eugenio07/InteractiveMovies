@@ -12,4 +12,6 @@ class UserUseCases(private val userRepository: UserRepository) {
 
     suspend fun getUserProfile(): Either<String, User> = userRepository.getUserProfile()
 
+    suspend fun getUserTransactions(cardNo: String) = userRepository.getUserTransactions(cardNo)
+
 }

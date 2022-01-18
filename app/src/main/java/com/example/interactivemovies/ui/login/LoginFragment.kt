@@ -4,8 +4,9 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.INVISIBLE
+import android.view.View.*
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
@@ -41,18 +42,25 @@ class LoginFragment : Fragment() {
 
         viewModel.model.observe(viewLifecycleOwner, Observer(::changedUI))
 
+        viewModel.showProgress.observe(viewLifecycleOwner, Observer(::showProgress))
 
         return binding.root
     }
 
+
+    private fun showProgress(show: Boolean) {
+        binding.progressCircular.visibility = if(show)  VISIBLE else GONE
+    }
+
     private fun changedUI(event: Event<LoginModel>) {
+        viewModel.showProgress(false)
         event.getContentIfNotHandled()?.let { model ->
             when (model) {
                 is GoToProfile -> {
                     this.findNavController()
                         .navigate(LoginFragmentDirections.actionLoginFragmentToProfileFragment())
                 }
-                is ShowError -> TODO()
+                is ShowError -> Toast.makeText(requireContext(), model.message, Toast.LENGTH_LONG).show()
             }
         }
     }
