@@ -1,17 +1,23 @@
 <resources>
     <string name="app_name">InteractiveMovies</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_home">Perfil</string>
+    <string name="title_dashboard">Cartelera</string>
     <string name="user_name">Nombre de usuario</string>
     <string name="password">Contraseña</string>
     <string name="login">Iniciar sesión</string>
     <string name="welcome">Bienvenido:\n%s</string>
-    <string name="email">Email:\n%s</string>
+    <string name="email" translatable="false">Email:\n%s</string>
     <string name="card_no">Tarjeta:\n%s</string>
     <string name="movie_title">Título:</string>
     <string name="movie_classification">Clasificación:</string>
     <string name="movie_genre">Género:</string>
     <string name="movie_duration">Duración:</string>
     <string name="movie_synopsis">Sinopsis:</string>
+    <string name="movie_detail">Detalle de película</string>
+    <string name="movie_listings">Cartelera</string>
+    <string name="user_profile">Perfil de usuario</string>
+    <string name="share">Compartir</string>
+    <string name="share_message">Vi la pelicula %s y me encantó</string>
+
+
 </resources>

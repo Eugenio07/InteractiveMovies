@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.example.interactivemovies.ui.detail.DetailFragment"
-        android:label="detail_fragment"
+        android:label="@string/movie_detail"
         tools:layout="@layout/detail_fragment" >
         <argument
             android:name="movieID"
@@ -26,12 +26,12 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.interactivemovies.ui.profile.ProfileFragment"
-        android:label="profile_fragment"
+        android:label="@string/user_profile"
         tools:layout="@layout/profile_fragment" />
     <fragment
         android:id="@+id/listingsFragment"
         android:name="com.example.interactivemovies.ui.listings.ListingsFragment"
-        android:label="listings_fragment"
+        android:label="@string/movie_listings"
         tools:layout="@layout/listings_fragment" >
         <action
             android:id="@+id/action_listingsFragment_to_detailFragment"

@@ -1,11 +1,10 @@
 package com.example.interactivemovies.ui.detail
 
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -20,6 +19,7 @@ import com.example.interactivemovies.ui.listings.ListingsAdapter
 import com.example.interactivemovies.ui.listings.ListingsFragmentDirections
 import com.example.interactivemovies.ui.listings.ListingsListener
 import com.example.interactivemovies.ui.listings.ListingsViewModel
+import com.orhanobut.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,7 +37,7 @@ class DetailFragment : Fragment() {
         binding.lifecycleOwner = this
 
         viewModel.model.observe(viewLifecycleOwner, Observer(::changedUI))
-
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -46,18 +46,36 @@ class DetailFragment : Fragment() {
             when (model) {
                 is ShowError -> TODO()
                 is ShowMovieDetail -> {
-                    with(binding){
+                    with(binding) {
                         fieldTitle.text = model.movie.name
                         fieldClassification.text = model.movie.rating
                         fieldDuration.text = model.movie.length
                         fieldGenre.text = model.movie.genre
                         fieldSynopsis.text = model.movie.synopsis
-                        vvTrailer.setVideoPath(model.movie.video)
+                        vvTrailer.setVideoPath(model.movie.video.replace("http:", "https:"))
                         vvTrailer.start()
                     }
 
                 }
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.share_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.share -> {
+                val message = getString(R.string.share_message, viewModel.movieName)
+                val share = Intent(Intent.ACTION_SEND)
+                share.type = "text/plain"
+                share.putExtra(Intent.EXTRA_TEXT, message)
+                startActivity(Intent.createChooser(share, requireContext().getText(R.string.share)))
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

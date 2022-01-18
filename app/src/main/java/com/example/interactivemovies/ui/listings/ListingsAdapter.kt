@@ -3,10 +3,12 @@ package com.example.interactivemovies.ui.listings
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.domain.Movie
 import com.example.interactivemovies.databinding.MovieItemBinding
 import com.example.interactivemovies.ui.listings.ListingsAdapter.MovieHolder
-
+import com.orhanobut.logger.Logger
+import com.squareup.picasso.Picasso
 
 
 class ListingsAdapter(private val moviesList: List<Movie>, private val clickListener: ListingsListener):
@@ -18,11 +20,13 @@ RecyclerView.Adapter<MovieHolder>(){
                 with(binding){
                    // movieTitle.text = item.name
                     binding.movie = item.copy()
+                    movie = item
                     this.clickListener = clickListener
                     executePendingBindings()
-//                    val imageURL = "$route${item.media[0].resource}"
-//                    Picasso.get()
-//                        .load(imageURL)
+                    Logger.d(item.poster)
+
+//                    Glide.with(binding.root)
+//                        .load(item.poster)
 //                        .into(moviePoster)
                 }
             }

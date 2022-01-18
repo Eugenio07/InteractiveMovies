@@ -29,7 +29,8 @@ class ListingsViewModel @Inject constructor(
         data class ShowError(val error: String): ListingsModel()
     }
 
-    init {
+
+    fun findMovies(){
         viewModelScope.launch {
             _model.value =when(val response = moviesUseCases.getListings()){
                 is Either.Left -> Event(ShowError(response.l))

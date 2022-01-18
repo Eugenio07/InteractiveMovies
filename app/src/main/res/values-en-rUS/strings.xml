@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">InteractiveMovies</string>
+    <string name="title_home">Profile</string>
+    <string name="title_dashboard">Cinema listings</string>
+    <string name="user_name">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="welcome">Welcome:\n%s</string>
+    <string name="card_no">Card:\n%s</string>
+    <string name="movie_title">Title:</string>
+    <string name="movie_classification">Classification:</string>
+    <string name="movie_genre">Genre:</string>
+    <string name="movie_duration">Duration:</string>
+    <string name="movie_synopsis">Synopsis</string>
+    <string name="movie_detail">Movie detail</string>
+    <string name="movie_listings">Cinema listings</string>
+    <string name="user_profile">User profile</string>
+    <string name="share">Share</string>
+    <string name="share_message">I saw the movie %s and I loved it</string>
+</resources>
