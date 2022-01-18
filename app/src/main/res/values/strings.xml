@@ -7,7 +7,7 @@
     <string name="login">Iniciar sesión</string>
     <string name="welcome">Bienvenido:\n%s</string>
     <string name="email" translatable="false">Email:\n%s</string>
-    <string name="card_no">Tarjeta:\n%s</string>
+    <string name="card">Tarjeta:\n%s</string>
     <string name="movie_title">Título:</string>
     <string name="movie_classification">Clasificación:</string>
     <string name="movie_genre">Género:</string>
@@ -18,6 +18,10 @@
     <string name="user_profile">Perfil de usuario</string>
     <string name="share">Compartir</string>
     <string name="share_message">Vi la pelicula %s y me encantó</string>
+    <string name="card_no">Número de tarjeta</string>
+    <string name="current_level">Nivel actual: %s</string>
+    <string name="next_level">Próximo nivel: %s</string>
+
 
 
 </resources>

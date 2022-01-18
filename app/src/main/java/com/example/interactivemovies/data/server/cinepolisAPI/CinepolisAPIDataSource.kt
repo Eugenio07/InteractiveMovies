@@ -4,7 +4,9 @@ import com.example.data.sources.RemoteDataSource
 import com.example.domain.Either
 import com.example.domain.Movie
 import com.example.domain.User
+import com.example.domain.UserTransactions
 import com.example.interactivemovies.data.toDomainMovie
+import com.example.interactivemovies.data.toDomainTransactions
 import com.example.interactivemovies.data.toUser
 import com.orhanobut.logger.Logger
 import kotlinx.coroutines.Dispatchers
@@ -46,11 +48,11 @@ class CinepolisAPIDataSource : RemoteDataSource {
             }
         }
 
-    override suspend fun userTransactions(tokenType: String, token: String, cardNo: String) {
+    override suspend fun userTransactions(cardNo: String): Either<String, UserTransactions> =
         withContext(Dispatchers.IO) {
             try {
                 Either.Right(
-                    CinepolisAPI.RETROFIT_SERVICE.getUserTransactions(auth = "$tokenType $token", transactionRequest = TransactionRequest(cardNo))
+                    CinepolisAPI.RETROFIT_SERVICE.getUserTransactions( transactionRequest = TransactionRequest(cardNo)).toDomainTransactions()
                 )
             } catch (e: HttpException) {
                 Either.Left("Connection failure")
@@ -58,7 +60,7 @@ class CinepolisAPIDataSource : RemoteDataSource {
                 Either.Left(e.message ?: "Connection failure")
             }
         }
-    }
+
 
     override suspend fun getListings(): Either<String, List<Movie>> =
         withContext(Dispatchers.IO) {

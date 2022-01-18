@@ -7,8 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.domain.Either
 import com.example.domain.Event
 import com.example.domain.User
-import com.example.interactivemovies.ui.profile.ProfileViewModel.ProfileModel.ShowError
-import com.example.interactivemovies.ui.profile.ProfileViewModel.ProfileModel.ShowUserProfile
+import com.example.domain.UserTransactions
+import com.example.interactivemovies.ui.profile.ProfileViewModel.ProfileModel.*
 import com.example.usecases.UserUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -27,8 +27,11 @@ class ProfileViewModel @Inject constructor(
     val showProgress: LiveData<Boolean>
         get() = _showProgress
 
+    var cardNo = ""
+
     sealed class ProfileModel {
         data class ShowUserProfile(val user: User) : ProfileModel()
+        data class ShowUserTransactions(val transactions: UserTransactions) : ProfileModel()
         data class ShowError(val error: String) : ProfileModel()
     }
 
@@ -48,8 +51,14 @@ class ProfileViewModel @Inject constructor(
 
     fun getUserTransactions() {
         showProgress(true)
-        viewModelScope.launch {
-            userUseCases.getUserTransactions("1303030981578736")
-        }
+        if(cardNo.length == 16){
+            viewModelScope.launch {
+                _model.value = when (val response = userUseCases.getUserTransactions(cardNo)) {
+                    is Either.Left -> Event(ShowError(response.l))
+                    is Either.Right -> Event(ShowUserTransactions(response.r))
+                }
+            }
+        } else _model.value = Event(ShowError("Error con los datos de la tarjeta"))
+
     }
 }

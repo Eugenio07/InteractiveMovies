@@ -7,7 +7,7 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="welcome">Welcome:\n%s</string>
-    <string name="card_no">Card:\n%s</string>
+    <string name="card">Card:\n%s</string>
     <string name="movie_title">Title:</string>
     <string name="movie_classification">Classification:</string>
     <string name="movie_genre">Genre:</string>
@@ -18,4 +18,7 @@
     <string name="user_profile">User profile</string>
     <string name="share">Share</string>
     <string name="share_message">I saw the movie %s and I loved it</string>
+    <string name="card_no">Card number</string>
+    <string name="current_level">Current level: %s</string>
+    <string name="next_level">Next level: %s</string>
 </resources>

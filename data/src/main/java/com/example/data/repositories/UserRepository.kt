@@ -4,6 +4,7 @@ import com.example.data.sources.LocalDataSource
 import com.example.data.sources.RemoteDataSource
 import com.example.domain.Either
 import com.example.domain.User
+import com.example.domain.UserTransactions
 
 class UserRepository(
     private val localDataSource: LocalDataSource,
@@ -20,10 +21,9 @@ class UserRepository(
             }
         }
 
-    suspend fun getUserTransactions(cardNo: String){
-        val user = localDataSource.getUser()
-        remoteDataSource.userTransactions(user.tokenType, user.token, cardNo)
-    }
+    suspend fun getUserTransactions(cardNo: String): Either<String, UserTransactions> =
+        remoteDataSource.userTransactions(cardNo)
+
 
     suspend fun getUserProfile(): Either<String, User> {
         val user = localDataSource.getUser()
