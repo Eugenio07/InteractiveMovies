@@ -10,7 +10,6 @@ import com.example.domain.Movie
 import com.example.interactivemovies.ui.listings.ListingsViewModel.ListingsModel.ShowError
 import com.example.interactivemovies.ui.listings.ListingsViewModel.ListingsModel.ShowListings
 import com.example.usecases.MoviesUseCases
-import com.orhanobut.logger.Logger
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -32,7 +31,6 @@ class ListingsViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            Logger.d("traigo cartelera")
             _model.value =when(val response = moviesUseCases.getListings()){
                 is Either.Left -> Event(ShowError(response.l))
                 is Either.Right -> Event(ShowListings(response.r))

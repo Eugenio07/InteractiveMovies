@@ -20,7 +20,6 @@ import com.example.interactivemovies.ui.listings.ListingsAdapter
 import com.example.interactivemovies.ui.listings.ListingsFragmentDirections
 import com.example.interactivemovies.ui.listings.ListingsListener
 import com.example.interactivemovies.ui.listings.ListingsViewModel
-import com.orhanobut.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -44,11 +43,9 @@ class DetailFragment : Fragment() {
 
     private fun changedUI(event: Event<DetailModel>) {
         event.getContentIfNotHandled()?.let { model ->
-            Logger.d("model: $model")
             when (model) {
                 is ShowError -> TODO()
                 is ShowMovieDetail -> {
-                    Logger.d(model.movie)
                     with(binding){
                         fieldTitle.text = model.movie.name
                         fieldClassification.text = model.movie.rating

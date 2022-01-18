@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.domain.Event
 import com.example.domain.Movie
 import com.example.usecases.MoviesUseCases
-import com.orhanobut.logger.Logger
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -30,7 +29,6 @@ class DetailViewModel @Inject constructor(
     }
 
     init {
-        Logger.d(movieID)
         viewModelScope.launch {
             _model.value =Event(DetailModel.ShowMovieDetail(moviesUseCases.getMovieByID(movieID)))
         }

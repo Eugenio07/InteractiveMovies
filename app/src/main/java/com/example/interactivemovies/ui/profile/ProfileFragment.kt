@@ -18,7 +18,6 @@ import com.example.interactivemovies.ui.detail.DetailViewModel
 import com.example.interactivemovies.ui.login.LoginFragmentDirections
 import com.example.interactivemovies.ui.login.LoginViewModel
 import com.example.interactivemovies.ui.profile.ProfileViewModel.ProfileModel
-import com.orhanobut.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -40,11 +39,9 @@ class ProfileFragment : Fragment() {
 
     private fun changedUI(event: Event<ProfileModel>) {
         event.getContentIfNotHandled()?.let { model ->
-            Logger.d("model: $model")
             when (model) {
                 is ProfileModel.ShowError -> TODO()
                 is ProfileModel.ShowUserProfile -> {
-                    //val fullName = "${model.user.firstName} ${model.user.lastName}"
                     binding.tvName.text = getString(R.string.welcome, "${model.user.firstName} ${model.user.lastName}")
                     binding.tvEmail.text = getString(R.string.email, model.user.email)
                     binding.tvCard.text = getString(R.string.card_no, model.user.cardNumber)

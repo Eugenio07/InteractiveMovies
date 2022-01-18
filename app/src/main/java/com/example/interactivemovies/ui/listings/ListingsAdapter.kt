@@ -21,7 +21,6 @@ RecyclerView.Adapter<MovieHolder>(){
                     this.clickListener = clickListener
                     executePendingBindings()
 //                    val imageURL = "$route${item.media[0].resource}"
-//                    Logger.d(imageURL)
 //                    Picasso.get()
 //                        .load(imageURL)
 //                        .into(moviePoster)
