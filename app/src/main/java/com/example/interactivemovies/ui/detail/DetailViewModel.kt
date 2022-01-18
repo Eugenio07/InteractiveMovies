@@ -22,15 +22,19 @@ class DetailViewModel @Inject constructor(
     val model: LiveData<Event<DetailModel>>
         get() = _model
 
+    var movieName= ""
 
     sealed class DetailModel {
-        data class ShowMovieDetail(val movie: Movie): DetailModel()
-        data class ShowError(val error: String): DetailModel()
+        data class ShowMovieDetail(val movie: Movie) : DetailModel()
+        data class ShowError(val error: String) : DetailModel()
     }
 
     init {
         viewModelScope.launch {
-            _model.value =Event(DetailModel.ShowMovieDetail(moviesUseCases.getMovieByID(movieID)))
+            val movie = moviesUseCases.getMovieByID(movieID)
+            movieName = movie.name
+            _model.value = Event(DetailModel.ShowMovieDetail(movie))
+
         }
     }
 }

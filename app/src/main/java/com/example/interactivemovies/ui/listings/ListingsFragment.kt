@@ -29,7 +29,9 @@ class ListingsFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.listings_fragment, container, false)
         binding.viewModel = viewModel
 
-        binding.rvMovies.layoutManager = GridLayoutManager(requireContext(),3)
+        binding.rvMovies.layoutManager = GridLayoutManager(requireContext(), 3)
+
+        viewModel.findMovies()
 
         viewModel.model.observe(viewLifecycleOwner, Observer(::changedUI))
 
@@ -41,12 +43,15 @@ class ListingsFragment : Fragment() {
             when (model) {
                 is ListingsModel.ShowError -> TODO()
                 is ListingsModel.ShowListings -> {
-                    binding.rvMovies.adapter = ListingsAdapter(model.listing, ListingsListener { movie ->
-                        this.findNavController()
-                            .navigate(ListingsFragmentDirections.actionListingsFragmentToDetailFragment(
-                                movie.id
-                            ))
-                    })
+                    binding.rvMovies.adapter =
+                        ListingsAdapter(model.listing, ListingsListener { movie ->
+                            this.findNavController()
+                                .navigate(
+                                    ListingsFragmentDirections.actionListingsFragmentToDetailFragment(
+                                        movie.id
+                                    )
+                                )
+                        })
                 }
             }
         }

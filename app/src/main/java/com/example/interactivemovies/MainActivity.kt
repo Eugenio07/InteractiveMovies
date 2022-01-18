@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         Logger.addLogAdapter(AndroidLogAdapter())
 
         binding = ActivityMainBinding.inflate(layoutInflater)
+        setSupportActionBar(binding.appBar)
         setContentView(binding.root)
 
         val navView: BottomNavigationView = binding.navView

@@ -3,13 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/ermu7/AndroidStudioProjects/InteractiveMovies/app/src/main/res/layout/activity_main.xml" value="0.35052083333333334" />
-        <entry key="..\:/Users/ermu7/AndroidStudioProjects/InteractiveMovies/app/src/main/res/layout/detail_fragment.xml" value="0.33489583333333334" />
+        <entry key="..\:/Users/ermu7/AndroidStudioProjects/InteractiveMovies/app/src/main/res/layout/activity_main.xml" value="0.2897473997028232" />
+        <entry key="..\:/Users/ermu7/AndroidStudioProjects/InteractiveMovies/app/src/main/res/layout/detail_fragment.xml" value="0.30326594090202175" />
         <entry key="..\:/Users/ermu7/AndroidStudioProjects/InteractiveMovies/app/src/main/res/layout/listings_fragment.xml" value="0.33489583333333334" />
         <entry key="..\:/Users/ermu7/AndroidStudioProjects/InteractiveMovies/app/src/main/res/layout/login_fragment.xml" value="0.25" />
         <entry key="..\:/Users/ermu7/AndroidStudioProjects/InteractiveMovies/app/src/main/res/layout/movie_item.xml" value="0.22" />
         <entry key="..\:/Users/ermu7/AndroidStudioProjects/InteractiveMovies/app/src/main/res/layout/profile_fragment.xml" value="0.25" />
         <entry key="..\:/Users/ermu7/AndroidStudioProjects/InteractiveMovies/app/src/main/res/menu/bottom_nav_menu.xml" value="0.15572916666666667" />
+        <entry key="..\:/Users/ermu7/AndroidStudioProjects/InteractiveMovies/app/src/main/res/menu/share_menu.xml" value="0.33" />
       </map>
     </option>
   </component>

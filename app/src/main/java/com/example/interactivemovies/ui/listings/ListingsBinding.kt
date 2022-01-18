@@ -15,16 +15,10 @@ fun bindTextTitle(textView: TextView, title: String) {
 }
 
 @BindingAdapter("moviePoster")
-fun bindImage(imgView: ImageView, imageUrl: String?) {
+fun bindImage(imageView: ImageView, imageUrl: String?) {
     imageUrl?.let { image ->
         Picasso.get()
             .load(image)
-            .into(imgView)
+            .into(imageView)
     }
 }
-
-//@BindingAdapter("movieListData")
-//fun bindRecyclerViewProducts(recyclerView: RecyclerView, data: List<Movie>?) {
-//    val adapter = recyclerView.adapter as AdapterItem
-//    adapter.submitList(data)
-//}
