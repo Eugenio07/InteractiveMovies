@@ -1,6 +1,6 @@
 package com.example.data.repositories
 
-import com.example.data.source.LocalDataSource
+import com.example.data.sources.LocalDataSource
 import com.example.data.sources.RemoteDataSource
 import com.example.domain.Either
 import com.example.domain.User

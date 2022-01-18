@@ -1,8 +1,11 @@
 package com.example.interactivemovies.data
 
+import com.example.domain.Movie
 import com.example.domain.User
+import com.example.interactivemovies.data.database.entity.MovieDB
 import com.example.interactivemovies.data.server.cinepolisAPI.UserLoginResponse
 import com.example.interactivemovies.data.database.entity.UserDB
+import com.example.interactivemovies.data.server.cinepolisAPI.ListingsResponse
 import com.example.interactivemovies.data.server.cinepolisAPI.UserProfileResponse
 
 fun User.toUserDB(): UserDB = UserDB(
@@ -47,4 +50,56 @@ fun UserProfileResponse.toUser(): User = User(
     phone = phone_number,
     picture = profile_picture,
     cardNumber = card_number
+)
+
+fun ListingsResponse.toDomainMovie(): List<Movie> {
+    return movies.map { movie ->
+        Movie(
+            rating = movie.rating,
+            position = movie.position,
+            genre = movie.genre,
+            synopsis = movie.synopsis,
+            length = movie.length,
+            release_date = movie.release_date,
+            distributor = movie.distributor,
+            id = movie.id,
+            name = movie.name,
+            code = movie.code,
+            original_name = movie.original_name,
+            poster = "${routes[0].sizes.medium}${movie.media[0].resource}",
+            video = "${routes[2].sizes.medium}${movie.media[2].resource}"
+        )
+    }
+}
+
+fun Movie.toMovieDB(): MovieDB = MovieDB(
+    rating,
+    position,
+    genre,
+    synopsis,
+    length,
+    release_date,
+    distributor,
+    id,
+    name,
+    code,
+    original_name,
+    poster,
+    video
+)
+
+fun MovieDB.toMovie(): Movie = Movie(
+    rating,
+    position,
+    genre,
+    synopsis,
+    length,
+    release_date,
+    distributor,
+    id,
+    name,
+    code,
+    original_name,
+    poster,
+    video
 )

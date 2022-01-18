@@ -2,9 +2,9 @@ package com.example.interactivemovies.data.server.cinepolisAPI
 
 import com.example.data.sources.RemoteDataSource
 import com.example.domain.Either
+import com.example.domain.Movie
 import com.example.domain.User
-import com.example.interactivemovies.data.server.cinepolisAPI.CinepolisAPI
-import com.example.interactivemovies.data.server.cinepolisAPI.UserLoginRequest
+import com.example.interactivemovies.data.toDomainMovie
 import com.example.interactivemovies.data.toUser
 import com.orhanobut.logger.Logger
 import kotlinx.coroutines.Dispatchers
@@ -39,13 +39,9 @@ class CinepolisAPIDataSource : RemoteDataSource {
             Logger.d("token = $token")
 
             try {
-                val response = CinepolisAPI.RETROFIT_SERVICE.getUserProfile(
-                    auth = "$tokenType $token"
-                ).toUser()
-                Logger.d("response $response")
-
                 Either.Right(
-                    response
+                    CinepolisAPI.RETROFIT_SERVICE.getUserProfile(auth = "$tokenType $token")
+                        .toUser()
                 )
             } catch (e: HttpException) {
                 Either.Left("Connection failure")
@@ -53,5 +49,19 @@ class CinepolisAPIDataSource : RemoteDataSource {
                 Either.Left(e.message ?: "Connection failure")
             }
         }
+
+    override suspend fun getListings(): Either<String, List<Movie>> =
+        withContext(Dispatchers.IO) {
+            try {
+                val response = CinepolisAPI.RETROFIT_SERVICE.getListings().toDomainMovie()
+                Logger.d("response $response")
+                Either.Right(response)
+            } catch (e: HttpException) {
+                Either.Left("Connection failure")
+            } catch (e: Exception) {
+                Either.Left(e.message ?: "Connection failure")
+            }
+        }
+
 
 }

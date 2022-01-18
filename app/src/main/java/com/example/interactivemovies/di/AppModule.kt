@@ -1,7 +1,7 @@
 package com.example.interactivemovies.di
 
 import android.app.Application
-import com.example.data.source.LocalDataSource
+import com.example.data.sources.LocalDataSource
 import com.example.data.sources.RemoteDataSource
 import com.example.interactivemovies.data.database.db.AppDataBase
 import com.example.interactivemovies.data.database.db.RoomDataSource

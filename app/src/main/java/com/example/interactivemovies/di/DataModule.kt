@@ -1,7 +1,8 @@
 package com.example.interactivemovies.di
 
+import com.example.data.repositories.MoviesRepository
 import com.example.data.repositories.UserRepository
-import com.example.data.source.LocalDataSource
+import com.example.data.sources.LocalDataSource
 import com.example.data.sources.RemoteDataSource
 import dagger.Module
 import dagger.Provides
@@ -15,6 +16,11 @@ class DataModule {
     fun userRepositoryProvider(
         localDataSource: LocalDataSource,
         remoteDataSource: RemoteDataSource,
-        /*permissionChecker: PermissionCheck*/
     ) = UserRepository(localDataSource, remoteDataSource)
+
+    @Provides
+    fun moviesRepositoryProvider(
+        localDataSource: LocalDataSource,
+        remoteDataSource: RemoteDataSource,
+    ) = MoviesRepository(localDataSource, remoteDataSource)
 }
