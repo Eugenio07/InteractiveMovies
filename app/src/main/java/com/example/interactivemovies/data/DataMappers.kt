@@ -2,10 +2,12 @@ package com.example.interactivemovies.data
 
 import com.example.domain.Movie
 import com.example.domain.User
+import com.example.domain.UserTransactions
 import com.example.interactivemovies.data.database.entity.MovieDB
 import com.example.interactivemovies.data.server.cinepolisAPI.UserLoginResponse
 import com.example.interactivemovies.data.database.entity.UserDB
 import com.example.interactivemovies.data.server.cinepolisAPI.ListingsResponse
+import com.example.interactivemovies.data.server.cinepolisAPI.TransactionsResponse
 import com.example.interactivemovies.data.server.cinepolisAPI.UserProfileResponse
 
 fun User.toUserDB(): UserDB = UserDB(
@@ -103,3 +105,14 @@ fun MovieDB.toMovie(): Movie = Movie(
     poster,
     video
 )
+
+fun TransactionsResponse.toDomainTransactions(): UserTransactions =
+    UserTransactions(
+        name1 = balance_list[0].name,
+        balance1 = balance_list[0].balance,
+        name2 = balance_list[1].name,
+        balance2 = "${balance_list[1].balance} ${balance_list[1].message}",
+        level = level.name,
+        nextLevel = level.next_level,
+        message = level.message
+    )

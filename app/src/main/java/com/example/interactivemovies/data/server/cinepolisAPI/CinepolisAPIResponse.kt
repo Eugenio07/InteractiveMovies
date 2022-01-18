@@ -60,7 +60,31 @@ data class ListingsResponse(
             val large: String = "",
             val medium: String = "",
             val small: String = "",
-          //  val x-large: String
+            //  val x-large: String
         )
     }
+}
+
+data class TransactionsResponse(
+    val name: String?,
+    val email: String?,
+    val pin: Any?,
+    val balance_list: List<Balance>,
+    val level: Level,
+    val transactions: List<Any>?
+) {
+    data class Balance(
+        val balance: String,
+        val key: String,
+        val name: String,
+        val message: String
+    )
+
+    data class Level(
+        val next_level: String,
+        val advance_percent: Double,
+        val key: String,
+        val name: String,
+        val message: String
+    )
 }

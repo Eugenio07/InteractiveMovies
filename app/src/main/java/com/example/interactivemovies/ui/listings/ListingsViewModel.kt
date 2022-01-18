@@ -23,14 +23,21 @@ class ListingsViewModel @Inject constructor(
     val model: LiveData<Event<ListingsModel>>
         get() = _model
 
+    private val _showProgress = MutableLiveData<Boolean>()
+    val showProgress: LiveData<Boolean>
+        get() = _showProgress
 
     sealed class ListingsModel{
         data class ShowListings(val listing: List<Movie>): ListingsModel()
         data class ShowError(val error: String): ListingsModel()
     }
 
+    fun showProgress(bool: Boolean) {
+        _showProgress.value = bool
+    }
 
     fun findMovies(){
+        showProgress(true)
         viewModelScope.launch {
             _model.value =when(val response = moviesUseCases.getListings()){
                 is Either.Left -> Event(ShowError(response.l))
