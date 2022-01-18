@@ -35,6 +35,10 @@ class RoomDataSource(dataBase: AppDataBase): LocalDataSource {
         withContext(Dispatchers.IO) {movieDao.insertMovies(movies.map { it.toMovieDB() })}
     }
 
+    override suspend fun getMovieByID(movieID: Int): Movie =
+        withContext(Dispatchers.IO) {movieDao.getMovieByID(movieID).toMovie()}
+
+
 //    override suspend fun getRouteList(): List<Listings.Route> {
 //        TODO("Not yet implemented")
 //    }

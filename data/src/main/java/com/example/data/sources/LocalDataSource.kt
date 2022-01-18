@@ -12,5 +12,6 @@ interface LocalDataSource {
     suspend fun isListingsEmpty(): Boolean
     suspend fun getMovieList(): List<Movie>
     suspend fun insertMovieList(movies: List<Movie>)
+    suspend fun getMovieByID(movieID: Int): Movie
    // suspend fun getRouteList():List<Route>
 }

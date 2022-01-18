@@ -15,8 +15,6 @@ import com.example.domain.Event
 import com.example.interactivemovies.R
 import com.example.interactivemovies.databinding.ListingsFragmentBinding
 import com.example.interactivemovies.ui.listings.ListingsViewModel.ListingsModel
-import com.example.interactivemovies.ui.listings.ListingsViewModel.ListingsModel.GoToDetail
-import com.orhanobut.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -40,17 +38,14 @@ class ListingsFragment : Fragment() {
 
     private fun changedUI(event: Event<ListingsModel>) {
         event.getContentIfNotHandled()?.let { model ->
-            Logger.d("model: $model")
             when (model) {
-                is GoToDetail -> {
-                    this.findNavController()
-                        .navigate(ListingsFragmentDirections.actionListingsFragmentToDetailFragment())
-                }
                 is ListingsModel.ShowError -> TODO()
                 is ListingsModel.ShowListings -> {
-                    Logger.d(model.listing)
                     binding.rvMovies.adapter = ListingsAdapter(model.listing, ListingsListener { movie ->
-                    Logger.d(movie.id)
+                        this.findNavController()
+                            .navigate(ListingsFragmentDirections.actionListingsFragmentToDetailFragment(
+                                movie.id
+                            ))
                     })
                 }
             }

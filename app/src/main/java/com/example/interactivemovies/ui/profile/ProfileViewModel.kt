@@ -11,7 +11,6 @@ import com.example.interactivemovies.ui.login.LoginViewModel
 import com.example.interactivemovies.ui.profile.ProfileViewModel.ProfileModel.ShowError
 import com.example.interactivemovies.ui.profile.ProfileViewModel.ProfileModel.ShowUserProfile
 import com.example.usecases.UserUseCases
-import com.orhanobut.logger.Logger
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

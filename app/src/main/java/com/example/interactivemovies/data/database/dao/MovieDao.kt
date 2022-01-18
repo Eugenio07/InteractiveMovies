@@ -17,4 +17,6 @@ interface MovieDao {
     @Query("SELECT * FROM MovieDB")
     fun getMovieList(): List<MovieDB>
 
+    @Query("SELECT * FROM MovieDB WHERE id = :movieID")
+    fun getMovieByID(movieID:Int): MovieDB
 }

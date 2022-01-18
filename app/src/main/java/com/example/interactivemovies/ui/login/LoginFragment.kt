@@ -15,7 +15,6 @@ import com.example.interactivemovies.databinding.LoginFragmentBinding
 import com.example.interactivemovies.ui.login.LoginViewModel.LoginModel
 import com.example.interactivemovies.ui.login.LoginViewModel.LoginModel.GoToProfile
 import com.example.interactivemovies.ui.login.LoginViewModel.LoginModel.ShowError
-import com.orhanobut.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,7 +36,6 @@ class LoginFragment : Fragment() {
 
     private fun changedUI(event: Event<LoginModel>) {
         event.getContentIfNotHandled()?.let { model ->
-            Logger.d("model: $model")
             when (model) {
                 is GoToProfile -> {
                     this.findNavController()
