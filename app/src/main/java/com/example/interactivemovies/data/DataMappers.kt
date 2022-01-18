@@ -2,6 +2,7 @@ package com.example.interactivemovies.data
 
 import com.example.domain.Movie
 import com.example.domain.User
+import com.example.interactivemovies.data.database.entity.MovieDB
 import com.example.interactivemovies.data.server.cinepolisAPI.UserLoginResponse
 import com.example.interactivemovies.data.database.entity.UserDB
 import com.example.interactivemovies.data.server.cinepolisAPI.ListingsResponse
@@ -52,13 +53,10 @@ fun UserProfileResponse.toUser(): User = User(
 )
 
 fun ListingsResponse.toDomainMovie(): List<Movie> {
-   return movies.map { movie ->
+    return movies.map { movie ->
         Movie(
             rating = movie.rating,
-            cast = movie.cast.map { it.toDomainCast() },
-            cinemas = movie.cinemas,
             position = movie.position,
-            categories = movie.categories,
             genre = movie.genre,
             synopsis = movie.synopsis,
             length = movie.length,
@@ -72,39 +70,36 @@ fun ListingsResponse.toDomainMovie(): List<Movie> {
             video = "${routes[2].sizes.medium}${movie.media[2].resource}"
         )
     }
-
 }
 
+fun Movie.toMovieDB(): MovieDB = MovieDB(
+    rating,
+    position,
+    genre,
+    synopsis,
+    length,
+    release_date,
+    distributor,
+    id,
+    name,
+    code,
+    original_name,
+    poster,
+    video
+)
 
-//fun ListingsResponse.Movie.Media.toDomainMedia(): Listings.Movie.Media =
-//    Listings.Movie.Media(resource, type, code)
-
-fun ListingsResponse.Movie.Cast.toDomainCast(): Movie.Cast =
-    Movie.Cast(label, value)
-
-//fun ListingsResponse.Movie.toDomainMovie(): Movie =
-//    Movie(
-//        rating,
-//        cast.map { it.toDomainCast() },
-//        cinemas,
-//        position,
-//        categories,
-//        genre,
-//        synopsis,
-//        length,
-//        release_date,
-//        distributor,
-//        id,
-//        name,
-//        code,
-//        original_name
-//    )
-
-//fun ListingsResponse.Route.Sizes.toDomainSizes(): Listings.Route.Sizes =
-//    Listings.Route.Sizes(large, medium, small)
-//
-//fun ListingsResponse.Route.toDomainRoutes(): Listings.Route =
-//    Listings.Route(code, sizes.toDomainSizes())
-//
-//fun ListingsResponse.toDomainListings(): Listings =
-//    Listings(movies.map { it.toDomainMovie() }, routes.map { it.toDomainRoutes() })
+fun MovieDB.toMovie(): Movie = Movie(
+    rating,
+    position,
+    genre,
+    synopsis,
+    length,
+    release_date,
+    distributor,
+    id,
+    name,
+    code,
+    original_name,
+    poster,
+    video
+)
