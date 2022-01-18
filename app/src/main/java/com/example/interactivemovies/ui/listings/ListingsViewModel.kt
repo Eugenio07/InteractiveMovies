@@ -28,7 +28,6 @@ class ListingsViewModel @Inject constructor(
     sealed class ListingsModel{
         data class ShowListings(val listing: List<Movie>): ListingsModel()
         data class ShowError(val error: String): ListingsModel()
-        data class GoToDetail(val message: String): ListingsModel()
     }
 
     init {
@@ -41,8 +40,4 @@ class ListingsViewModel @Inject constructor(
         }
     }
 
-    fun movieDetail()
-    {
-        _model.value = Event(ListingsModel.GoToDetail("Success"))
-    }
 }

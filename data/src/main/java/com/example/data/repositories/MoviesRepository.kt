@@ -19,5 +19,5 @@ class MoviesRepository(
         return Either.Right(localDataSource.getMovieList())
     }
 
-
+    suspend fun getMovieByID(movieID: Int): Movie = localDataSource.getMovieByID(movieID)
 }

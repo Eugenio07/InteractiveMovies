@@ -9,4 +9,9 @@
     <string name="welcome">Bienvenido:\n%s</string>
     <string name="email">Email:\n%s</string>
     <string name="card_no">Tarjeta:\n%s</string>
+    <string name="movie_title">Título:</string>
+    <string name="movie_classification">Clasificación:</string>
+    <string name="movie_genre">Género:</string>
+    <string name="movie_duration">Duración:</string>
+    <string name="movie_synopsis">Sinopsis:</string>
 </resources>
