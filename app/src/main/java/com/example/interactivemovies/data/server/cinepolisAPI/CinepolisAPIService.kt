@@ -8,6 +8,7 @@ const val API_KEY = "stage_HNYh3RaK_Test"
 
 const val LOGIN_USER = "v2/oauth/token"
 const val USER_PROFILE = "v1/members/profile?country_code=MX"
+const val GET_LISTINGS = "v2/movies?country_code=MX&cinemas=61"
 
 interface CinepolisAPIService {
     @FormUrlEncoded
@@ -27,6 +28,11 @@ interface CinepolisAPIService {
         @Header("api_key") apiKey: String = API_KEY,
         @Header("Authorization") auth: String
     ): UserProfileResponse
+
+    @GET(GET_LISTINGS)
+    suspend fun getListings(@Header("api_key") apiKey: String = API_KEY): ListingsResponse
+
+
 }
 
 object CinepolisAPI {

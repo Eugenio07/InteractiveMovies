@@ -109,4 +109,7 @@ dependencies {
     //Inyector de dependencias
     implementation 'com.google.dagger:hilt-android:2.40.5'
     kapt 'com.google.dagger:hilt-compiler:2.40.5'
+
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }

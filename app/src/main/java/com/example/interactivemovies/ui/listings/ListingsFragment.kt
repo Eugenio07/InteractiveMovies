@@ -1,5 +1,6 @@
 package com.example.interactivemovies.ui.listings
 
+import android.app.Application
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.domain.Event
 import com.example.interactivemovies.R
 import com.example.interactivemovies.databinding.ListingsFragmentBinding
@@ -29,6 +31,8 @@ class ListingsFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.listings_fragment, container, false)
         binding.viewModel = viewModel
 
+        binding.rvMovies.layoutManager = GridLayoutManager(requireContext(),3)
+
         viewModel.model.observe(viewLifecycleOwner, Observer(::changedUI))
 
         return binding.root
@@ -41,6 +45,13 @@ class ListingsFragment : Fragment() {
                 is GoToDetail -> {
                     this.findNavController()
                         .navigate(ListingsFragmentDirections.actionListingsFragmentToDetailFragment())
+                }
+                is ListingsModel.ShowError -> TODO()
+                is ListingsModel.ShowListings -> {
+                    Logger.d(model.listing)
+                    binding.rvMovies.adapter = ListingsAdapter(model.listing, ListingsListener { movie ->
+                    Logger.d(movie.id)
+                    })
                 }
             }
         }
